@@ -18,6 +18,14 @@
   #js {:is "my-list"
        :properties  #js {:items #js {:type js/Array
                                      :notify true}}})
+
+(println "registering my-greeting")
+(js/Polymer
+  #js {:is "my-greeting"
+       :properties  #js {:greeting #js {:type js/String
+                                        :value "Welcome!"
+                                        :notivy true}}})
+
 (.addEventListener main "dom-change"
   (fn []
     (println "DOM-CHANGE")
@@ -59,7 +67,7 @@
 ;; Close drawer after menu item is selected if drawerPanel is narrow
 (set! (.-onDataRouteClick main)
   (fn [] (let [drawerPanel (.querySelector js/document "#paperDrawerPanel")]
-           (when (.narrow drawerPanel)
+           (when (.-narrow drawerPanel)
              (.closeDrawer drawerPanel)))))
 
 (println "setting scrollPageToTop?")

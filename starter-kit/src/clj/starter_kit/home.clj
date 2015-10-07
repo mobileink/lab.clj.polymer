@@ -5,19 +5,18 @@
             [starter-kit.components :refer :all]
         ))
 
-(log/debug (str "COMPONENTS my-list: " starter-kit.components/my-list))
-
-(co-ns ;; starter-kit.home
-  "Polymer DEMO (starter-kit)"
+(co-ns
+  "Polymeraj Starter Kit"
   (:require[polymer.iron :as iron :refer [ajax flex-layout icons list pages selector]]
            [polymer.paper :as paper
             :refer [button drawer-panel icon-button item
                     material menu scroll-header-panel
                     styles toolbar]]
-           [visionmedia.page :js "scripts/lib/page/page.js"]
-           [starter-kit.components [my-list]]
+           [starter-kit.components [my-list my-greeting]]
+           ;; to use the html versions:
            ;; [components.my-list :html  "components/my-list/my-list.html"]
-           [components.my-greeting :html  "components/my-greeting/my-greeting.html"]
+           ;; [components.my-greeting :html  "components/my-greeting/my-greeting.html"]
+           [visionmedia.page :js "scripts/lib/page/page.js"]
             ))
 
 ;; (log/trace "HEADER: ")
