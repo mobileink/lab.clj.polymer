@@ -1,0 +1,27 @@
+{
+    "name": "iron-list",
+    "version": "0.0.0",
+    "authors": [
+	"Your Name <your-email@example.org>"
+    ],
+
+    "description": "",
+    "main": "",
+    "moduleType": [],
+    "license": "MIT",
+    "homepage": "",
+
+    "private": true,
+    "dependencies": {
+	"page": "visionmedia/page.js#~1.6.3"
+    },
+
+    "ignore": [
+	"**/.*",
+	"node_modules",
+	"bower_components",
+	"src/main/webapp",
+	"test",
+	"tests"
+    ]
+}
