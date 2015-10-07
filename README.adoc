@@ -1,0 +1,85 @@
+# lab.clj.polymer
+
+A laboratory for experimenting with Google Polymer and Clojure/ClojureScript
+
+* link:doc/Styling.adoc[Styling]
+* link:doc/Laout.adoc[Layout]
+
+## HTML: a purely functional language
+
+## code organization
+
+* Use a jar for the Polymer library. Either roll your own or use `polymirage`.
+
+#### JSVM configuration
+
+The `<head>` element in an html file essentially configures the JSVM
+(Javascript Virtual Machine):
+
+* `<meta>` elements set the metadata of the JSVM
+
+* `<script>` elements prepare the JSVM runtime environment by
+  pre-registering the functions and variables that will be used by the page
+
+* `<style>` elements register the stylesheet for the page
+
+The `<script>` element is analogous to Clojure's `require` function.
+
+In a standard Javascript environment, we have no namespaces, so
+everything is organized by file.  This means you have to keep track of
+which files are needed and write a `<script>` declaration for each one.
+
+With Clojure and Clojurescript we have namespaces, so we don't worry
+about files.  We `require` namespaces, and the runtime is responsible
+for translating them into file names, finding the files, and loading
+them.  We can do the same thing for loading Javascript files into the
+browser: require a namespace, and let the Clojure runtime figure out
+and write the `<script>` expressions.
+
+So we're going to use Clojure to hide the complexity of the html
+`<head>` element.  Instead of
+
+[source,html]
+----
+<html>
+  <head>
+    <script src="foo/bar.html"></script>
+...
+----
+
+we will write something like
+
+[source,clojure]
+----
+(html-ns
+  (:require [foo.bar]))
+...
+----
+
+The HTML content of the page is just like the content of a Clojure
+source file that contains only function application expressions.
+Compare:
+
+[source,clojre]
+----
+(ns foo.bar)
+(println "Hello world!")
+----
+
+[source,html]
+----
+<html>
+  <body>
+  Hello world.
+  </body>
+</html>
+----
+
+This directly translates, both conceptually and formally.  Just map
+`<html>` to `(ns foo.bar)`, and treat `<body>` as a function:
+
+[source,clojure]
+----
+(ns html)
+(body "Hello world!")
+----
