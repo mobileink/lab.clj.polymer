@@ -1,0 +1,193 @@
+# polymer styling
+
+* <<summary,summary>>
+* <<stylemods,style modules>>
+* <<customstyles,custom-style>>
+* <<docstyles,document styling>>
+* <<compstyles,component styling>>
+* <<customcss,custom style properties (css variables)>>
+** <<stylebindings,style bindings>>
+* <<themes,themes>>
+* <<switching,switching themes>>
+* <<references,references>>
+
+## summary:
+
+* Define style modules in an html file, use a `<link>` element to
+  import the file, then use a `<style is="custom-style" include="...">`
+  element to pull in desired styles.  Use this technique for both
+  document and component styling.
+
+* For components, put `<style>` elements _inside_ the `<template>` element.
+
+* Use xref:customcss[custom style properties]
+** to share commonly used styles, e.g. color palettes
+** to support xref:stylebinding[style binding] in custom components
+
+* Use themes (see link:https://polymerthemes.com/[Polymer Themes])
+
+Conventions:
+
+* Source code organization
+
+** `<approot>/styles`
+** `<approot>/scripts`
+** `<approot>/themes`
+
+* File naming
+
+** Shared style html file: `<approot>/styles/shared/style-modules.html` (this
+   file contains only style modules
+
+## [[stylemods]] style modules
+
+A style module is a `<dom-module>` containing a `<style>` specification.  For example:
+
+[source,html]
+----
+<!-- shared-styles.html -->
+<dom-module id="my-style">
+  <template>
+    <style>
+      .red { color: red; }
+    </style>
+  </template>
+</dom-module>
+----
+
+Style modules support the sharing of stylesheets across multiple files.
+
+## [[customstyles]] custom-style
+
+A `custom-style` element is a `<link>` element with attribute
+`is="custom-style"`:
+
+[source,html]
+----
+<style is="custom-style">
+  .myclass {background:green;}
+</style>
+----
+
+You can also include an external stylesheet by using an `include` attribute
+that references a style-module:
+
+[source,html]
+----
+<style is="custom-style" include="my-style"></style>
+----
+
+Of course, for this to work you must import the file containing the
+style-module; see the next section.
+
+You can also take a hybrid approach:
+
+[source,html]
+----
+<style include="my-styles">
+  :host { display: block; }  <!-- override my-styles -->
+</style>
+----
+
+See
+link:https://www.polymer-project.org/1.0/docs/devguide/styling.html#custom-style[Custom
+element for document styling (custom-style)] for more details.  The
+`custom-style` mechanism ensures that various Polymer "shims" will be
+used where needed, and shielding component styles from global document
+styles.  Note the following warning:
+
+[WARNING]
+*The `custom-style` extension should only be used for defining document styles, outside of a custom element’s local DOM.*
+
+## [[docstyles]] document styling
+
+To style your document, define a style module in an html file, import
+the html file, and then include the style module (in `<head>`) using a
+`custom-style` element:
+
+[source,html]
+----
+<html>
+<head>
+...
+<link rel="import" href="../shared-styles/shared-styles.html">
+<style is="custom-style" include="my-style"></style>
+...
+</head>
+----
+
+## [[compstyles]] component styling
+* For styling custom components, external stylesheets are link:https://www.polymer-project.org/1.0/docs/devguide/styling.html#external-stylesheets[deprecated].  So do *not* do this within a `<dom-module>`:
+
+[source,html]
+----
+deprecated:
+ <dom-module id="my-awesome-button">
+  <!-- special import with type=css used to load remote CSS -->
+  <link rel="import" type="css" href="my-awesome-button.css">
+  ...
+</dom-module>
+----
+
+Instead, to this:
+
+[source,html]
+----
+<!-- shared-styles.html contains one or more (named) style modules -->
+<link rel="import" href="../shared-styles/shared-styles.html">
+<dom-module id="x-foo">
+  <template>
+    <!-- "my-style" is a style module specified in shared-styles.html -->
+    <style include="my-style"></style>
+    ...
+</dom-module>
+----
+
+## [[customcss]] custom style properties
+
+Polymer's "custom style properties" are compatible with
+link:https://drafts.csswg.org/css-variables/[CSS Custom Properties for
+Cascading Variables].
+
+A custom style property starts with a double-dash prefix and acts like
+a variable.  To define one, use a css declaration; to use one, use the
+`var()` function:
+
+[source,css]
+----
+.foo { --foo-bg-color: green; } // defines --foo-bg-color
+.bar { background-color: var(--foo-bg-color); }
+----
+
+These "css variables" must "cascade", so for this example to work the
+styling for `.foo` must be higher in the hierarchy than that for
+`.bar`.
+
+*BUT:* notice the syntax at link:https://github.com/PolymerElements/iron-flex-layout/blob/master/iron-flex-layout.html[iron-flex-layout].
+
+
+### [[stylebindings]] style bindings
+
+Components can bind style values in more or less the same way they
+bind data values.  To bind data values, one uses `\[[foo]]` (for
+one-way binding) or `{{foo}}` (for two-way binding).  To bind style
+values, use `var(--foo)`.  Then, if the user has defined a value for
+`--foo`, it will be used where `var(--foo)` occurs.
+
+See
+link:https://www.polymer-project.org/1.0/docs/devguide/styling.html#xscope-styling-details[Custom
+CSS Properties] for a more detailed example.
+
+
+## [[themes]] themes
+
+
+## [[switching]] switching themes
+
+## references
+
+Polymer docs:  link:https://www.polymer-project.org/1.0/docs/devguide/styling.html[Styling local DOM]
+
+https://polymerthemes.com/[Polymer Themes] is an online Polymer theme builder.
+
+link:https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_variables[Using CSS Variables] (MDN)
