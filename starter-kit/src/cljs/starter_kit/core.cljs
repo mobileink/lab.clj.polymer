@@ -19,12 +19,12 @@
        :properties  #js {:items #js {:type js/Array
                                      :notify true}}})
 
-(println "registering my-greeting")
-(js/Polymer
-  #js {:is "my-greeting"
-       :properties  #js {:greeting #js {:type js/String
-                                        :value "Welcome!"
-                                        :notivy true}}})
+;; (println "registering my-greeting")
+;; (js/Polymer
+;;   #js {:is "my-greeting"
+;;        :properties  #js {:greeting #js {:type js/String
+;;                                         :value "Welcome!"
+;;                                         :notivy true}}})
 
 (.addEventListener main "dom-change"
   (fn []

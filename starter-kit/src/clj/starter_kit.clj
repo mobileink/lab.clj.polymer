@@ -6,13 +6,14 @@
             [ring.middleware.resource :refer [wrap-resource]]
             [polymeraj.hiccup :as poly :refer :all]
     ))
-;
+
 (defroutes starter-kit-routes
 
   (GET "/" []
     (log/trace "route: /")
-    (poly/resume starter-kit.home main))
-
+    ;; Note: we do not :require starter-kit, because it is a co-namespace
+    (resume starter-kit.home main))
+;
   (route/not-found "Not Found"))
 ;;;;;;
 (def app

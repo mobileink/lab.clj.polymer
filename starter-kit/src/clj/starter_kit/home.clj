@@ -2,7 +2,8 @@
   (:require [polymeraj.hiccup :refer :all]
             [clojure.pprint :as pp]
             [clojure.tools.logging :as log :refer [debug info]]
-            [starter-kit.components :refer :all]
+            [polymeraj.hiccup :refer :all]
+            [starter-kit.components :refer [my-list my-greeting]] ;; :all]
         ))
 
 (co-ns
@@ -12,15 +13,15 @@
             :refer [button drawer-panel icon-button item
                     material menu scroll-header-panel
                     styles toolbar]]
-           [starter-kit.components [my-list my-greeting]]
-           ;; to use the html versions:
-           ;; [components.my-list :html  "components/my-list/my-list.html"]
-           ;; [components.my-greeting :html  "components/my-greeting/my-greeting.html"]
+           ;; the nasty html/js way:
+           [starter-ket.components :html  "components/my-greeting/my-greeting.html"]
+           ;; the cool clojure/clojurescript way:
+           [starter-kit.components :refer [my-list]]
            [visionmedia.page :js "scripts/lib/page/page.js"]
             ))
 
 ;; (log/trace "HEADER: ")
-;; (pp/pprint starter-kit.home/page)
+;; (pp/pprint Polymeraj)
 
 (defn home-section
   []
@@ -29,8 +30,7 @@
    [:paper-material {:elevation "1"}
     [:my-greeting]
 
-    [:p {:class "paper-font-subhead"} "You now have:"]
-    [:my-list]
+    [:p {:class "paper-font-subhead"} "You now have:"] [:my-list]
 
     [:p {:class "paper-font-body2"}
      "Looking for more Web App layouts? Check out our:"
@@ -64,7 +64,7 @@
    ]  ;;</section>
   )
 
-(defn main
+(co-routine main
   []
   [:body {:unresolved true :class "fullbleed layout vertical"}
 

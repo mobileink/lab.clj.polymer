@@ -1,7 +1,8 @@
 (ns starter-kit.components
-  (:require [hiccup.page :refer [html5]]))
+  (:require [hiccup.page :refer [html5]]
+            [polymeraj.hiccup :refer :all]))
 
-(defn my-list
+(co-fn my-list
   []
   [:link {:rel "import" :href "polymer/polymer/polymer.html"}]
   [:link {:rel "import" :href "styles/shared/style-modules.html"}]
