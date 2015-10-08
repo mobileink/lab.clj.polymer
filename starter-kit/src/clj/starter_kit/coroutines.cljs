@@ -1,4 +1,4 @@
-(ns starter-kit.core
+(ns starter-kit.coroutines
   (:require [clojure.browser.repl :as repl]))
 
 (enable-console-print!)
@@ -32,7 +32,8 @@
     (let [ml (.querySelector js/document "my-list")]
       (set! (.-items ml) (clj->js
                            ["HTML/Webcomponents as a Clojure language extension!"
-                            "Webcomponents as Clojure functions!"
+                            "Webpages as Clojure co-routines!  In co-namespaces!"
+                            "Webcomponents as Clojure (co-)functions!"
                             "Seamless integration with Clojurescript!"
                             "Plus:"
                             "Responsive Web App boilerplate",

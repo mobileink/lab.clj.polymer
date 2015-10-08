@@ -14,7 +14,7 @@
       [:li [:span {:class "paper-font-body1"}"{{item}}"]]]]]])
 
 
-(defn my-greeting
+(co-fn my-greeting
   []
   [:link {:rel "import" :href "polymer/polymer/polymer.html"}]
 

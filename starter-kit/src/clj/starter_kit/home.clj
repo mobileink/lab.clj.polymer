@@ -8,16 +8,16 @@
 
 (co-ns
   "Polymeraj Starter Kit"
-  (:require[polymer.iron :as iron :refer [ajax flex-layout icons list pages selector]]
-           [polymer.paper :as paper
-            :refer [button drawer-panel icon-button item
-                    material menu scroll-header-panel
-                    styles toolbar]]
-           ;; the nasty html/js way:
-           [starter-ket.components :html  "components/my-greeting/my-greeting.html"]
-           ;; the cool clojure/clojurescript way:
-           [starter-kit.components :refer [my-list]]
-           [visionmedia.page :js "scripts/lib/page/page.js"]
+  (:require [polymer.iron :as iron :refer [ajax flex-layout icons list pages selector]]
+            [polymer.paper :as paper
+             :refer [button drawer-panel icon-button item
+                     material menu scroll-header-panel
+                     styles toolbar]]
+            ;; the nasty html/js way - note the typo, namespace is ignored:
+            [starter-ket.components :html  "components/my-greeting/my-greeting.html"]
+            ;; the cool clojure/clojurescript way:
+            [starter-kit.components :refer [my-list]]
+            [visionmedia.page :js "scripts/lib/page/page.js"]
             ))
 
 ;; (log/trace "HEADER: ")
@@ -30,7 +30,8 @@
    [:paper-material {:elevation "1"}
     [:my-greeting]
 
-    [:p {:class "paper-font-subhead"} "You now have:"] [:my-list]
+    [:p {:class "paper-font-subhead"} "You now have:"]
+    [:my-list]
 
     [:p {:class "paper-font-body2"}
      "Looking for more Web App layouts? Check out our:"

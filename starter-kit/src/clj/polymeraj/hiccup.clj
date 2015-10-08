@@ -6,14 +6,6 @@
             [hiccup.core :refer [html]]
             [hiccup.page :refer [html5]]))
 
-(defmacro body
-  [attrs content]
-  [:body attrs content])
-
-(defmacro h1
-  [args]
-  [:h1 args])
-
 (defn path-to-ns
   [ns]
   (subs (string/replace (str ns) "/" ".") 1))
@@ -21,6 +13,8 @@
 (defn ns-to-path
   [ns]
   (string/replace (str ns) #"\.|-" {"." "/" "-" "_"}))
+
+(defonce polymer-nss #{"iron" "paper" "google" "gold" "neon" "platinum" "molecules"})
 
 (defn- get-reqs
   [reqs]
@@ -36,15 +30,17 @@
                      ;; (log/trace (str "opts: " opts))
                      (cond
                        (= (first pfx) "polymer")
-                       (let [refs (:refer (apply hash-map opts))]
-                         ;; FIXME: vet for supported nss: paper, iron, neon, etc.
+                       (let [pns (second pfx)
+                             refs (:refer (apply hash-map opts))]
+                         (if (not (contains? polymer-nss pns))
+                             (throw (RuntimeException. (str "unsupported namespace: " (first req)))))
                          (for [ref refs]
-                           [:link {:rel "import"
-                                   :href (str (first pfx) "/"
-                                           (second pfx) "-"
-                                           ref "/"
-                                           (second pfx) "-"
-                                           ref ".html")}]))
+                               [:link {:rel "import"
+                                       :href (str (first pfx) "/"
+                                               (second pfx) "-"
+                                               ref "/"
+                                               (second pfx) "-"
+                                               ref ".html")}]))
 
                        (keyword? (first opts)) ;; :refer, :js, :css, :html
                        (do #_(log/trace "KEYWORD: " (first opts))
