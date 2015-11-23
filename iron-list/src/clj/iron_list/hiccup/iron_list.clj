@@ -38,6 +38,16 @@
                  :last-response "{{data}}",
                  :auto "auto"}]
 
+
+    ;; <iron-ajax id="get_filltext_ajax" auto
+    ;;   url="//www.filltext.com/"
+    ;;   params='{"rows": "1000", "fname":"{firstName}", "lname": "{lastName}", "address": "{streetAddress}",
+    ;;    "city": "{city}", "state": "{usState|abb}", "zip": "{zip}", "integer": "{number|100}",
+    ;;    "business": "{business}", "index": "{index}"}'
+    ;;   handle-as="json"
+    ;;   loading="{{loading}}"
+    ;;   last-response="{{people}}">
+
     [:paper-scroll-header-panel.fit
      {:condenses true
       :keep-condensed-header true}
