@@ -2,16 +2,46 @@
 
 A laboratory for experimenting with Google Polymer and Clojure/ClojureScript
 
-* link:doc/Styling.adoc[Styling]
-* link:doc/Laout.adoc[Layout]
+* <<start,getting started>>
+* <<html,html: a purely functional language>>
 
-## HTML: a purely functional language
 
-## code organization
+= [[start]] getting started
 
-* Use a jar for the Polymer library. Either roll your own or use `polymirage`.
+Working with link:https://www.polymer-project.org/1.0/[Polymer]
+directly involves:
 
-#### JSVM configuration
+* writing "web source code", a combination of
+** HTML
+** javascript
+*** Events
+*** etc.
+** CSS
+*** link:doc/Styling.adoc[Styling]
+*** link:doc/Laout.adoc[Layout]
+* partitioning logic across server and client
+
+The tricky bit is coordinating the URIs in the HTML that will end up
+being GETted, and the "routes" that handle them on the server side.
+One design goal of Miraj is to eliminate this anoyance.
+
+
+Polymer is based on standard
+link:http://www.w3.org/standards/techs/components#w3c_all[Web
+Components]
+
+See also
+
+* link:http://www.2ality.com/2015/08/web-component-status.html[What
+happened to web components?]
+
+* link:https://hacks.mozilla.org/2015/06/the-state-of-web-components/[The State of Web Components] (9 June 2015): "Web Components have been in planning for over three years, but we’re optimistic the end is near. All major vendors are on board, enthusiastic, and investing significant time to help resolve the remaining issues."
+
+
+
+= [[html]] HTML as a purely functional language
+
+== JSVM configuration
 
 The `<head>` element in an html file essentially configures the JSVM
 (Javascript Virtual Machine):
@@ -56,8 +86,10 @@ we will write something like
 ...
 ----
 
-The HTML content of the page is just like the content of a Clojure
-source file that contains only function application expressions.
+The HTML content of the page is just Clojure code.  Similar to Hiccup,
+but without any specialized syntax: if you need a `foo` element you
+write `(foo ...)` rather than `[:foo ...]`.
+
 Compare:
 
 [source,clojre]
@@ -65,6 +97,8 @@ Compare:
 (ns foo.bar)
 (println "Hello world!")
 ----
+
+and
 
 [source,html]
 ----
@@ -83,3 +117,9 @@ This directly translates, both conceptually and formally.  Just map
 (ns html)
 (body "Hello world!")
 ----
+
+
+== code organization
+
+* Use a jar for the Polymer library. Either roll your own or use `miraj`.
+
