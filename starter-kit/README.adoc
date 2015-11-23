@@ -1,8 +1,10 @@
 # panels
 
+Depends on miraj
 
 ## Usage
 
+` $ lein ring server-headless`
 
 ## License
 

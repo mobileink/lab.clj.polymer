@@ -3,14 +3,17 @@
   :url "https://github.com/mobileink/lab.clj.polymer"
   :min-lein-version "2.0.0"
   :source-paths ["src/clj" "src/cljc"]
+  ;; NOTE: resource-path must match assumptions in miraj wrap-component
+  :resource-paths ["resources/public"]
   :dependencies [[org.clojure/clojure "1.7.0"] ;; "1.8.0-master-SNAPSHOT"]
                  [org.clojure/tools.reader "0.10.0-alpha1"]
                  [org.clojure/clojurescript "1.7.48"]
                  [compojure "1.4.0"]
                  [hiccup "1.0.5"]
-                 [polymeraj "1.1.4-SNAPSHOT"]
+                 [miraj "1.1.4-SNAPSHOT"]
                  [ring/ring-core "1.4.0"]
 		 [ring/ring-defaults "0.1.5"]
+                 [ring/ring-headers "0.1.3"]
                  [com.cemerick/url "0.1.1"]
                  [org.clojure/tools.logging "0.3.1"]
                  [org.slf4j/slf4j-log4j12 "1.7.1"]

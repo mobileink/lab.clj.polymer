@@ -1,13 +1,12 @@
 (ns starter-kit.home
-  (:require [polymeraj.hiccup :refer :all]
-            [clojure.pprint :as pp]
+  (:require [clojure.pprint :as pp]
             [clojure.tools.logging :as log :refer [debug info]]
-            [polymeraj.hiccup :refer :all]
+            [miraj.core :refer :all]
             [starter-kit.components :refer [my-list my-greeting]] ;; :all]
         ))
 
 (co-ns
-  "Polymeraj Starter Kit"
+  "Miraj Starter Kit"
   (:require [polymer.iron :as iron :refer [ajax flex-layout icons list pages selector]]
             [polymer.paper :as paper
              :refer [button drawer-panel icon-button item
@@ -21,7 +20,7 @@
             ))
 
 ;; (log/trace "HEADER: ")
-;; (pp/pprint Polymeraj)
+;; (pp/pprint Miraj)
 
 (defn home-section
   []
@@ -104,7 +103,7 @@
 
        "<!-- Application name -->"
        [:div {:class "middle middle-container center horizontal layout"}
-        [:div {:class "app-name"}"Polymeraj Starter Kit"]]
+        [:div {:class "app-name"}"Miraj Starter Kit"]]
 
        "<!-- Application sub title -->"
        [:div {:class "bottom bottom-container center horizontal layout"}
@@ -147,7 +146,7 @@
       ]  ;;</paper-scroll-header-panel>
       ]  ;;</paper-drawer-panel>
      ] ;; template
-   ;; FIXME:  have polymeraj/resume insert this automagically?
+   ;; FIXME:  have miraj/resume insert this automagically?
     [:script {:src "scripts/starter_kit.js"}]
     "<!-- endbuild-->"
    ]  ;;</body>

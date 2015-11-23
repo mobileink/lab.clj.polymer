@@ -1,8 +1,8 @@
 (ns starter-kit.components
   (:require [hiccup.page :refer [html5]]
-            [polymeraj.hiccup :refer :all]))
+            [miraj.core :refer :all]))
 
-(co-fn my-list
+(co-defn my-list
   []
   [:link {:rel "import" :href "polymer/polymer/polymer.html"}]
   [:link {:rel "import" :href "styles/shared/style-modules.html"}]
@@ -14,7 +14,7 @@
       [:li [:span {:class "paper-font-body1"}"{{item}}"]]]]]])
 
 
-(co-fn my-greeting
+(co-defn my-greeting
   []
   [:link {:rel "import" :href "polymer/polymer/polymer.html"}]
 
